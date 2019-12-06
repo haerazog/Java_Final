@@ -23,6 +23,14 @@ JNIEXPORT jdouble JNICALL Java_usbinterfacejava_UsbInterfaceJava_Suma
 JNIEXPORT jdouble JNICALL Java_usbinterfacejava_UsbInterfaceJava_Resta
   (JNIEnv *, jobject, jint, jint);
 
+/*
+ * Class:     usbinterfacejava_UsbInterfaceJava
+ * Method:    sayHello
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_usbinterfacejava_UsbInterfaceJava_sayHello
+  (JNIEnv *, jobject, jstring);
+
 #ifdef __cplusplus
 }
 #endif
