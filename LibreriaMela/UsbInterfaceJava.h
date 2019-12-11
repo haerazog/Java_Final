@@ -9,27 +9,28 @@ extern "C" {
 #endif
 /*
  * Class:     usbinterfacejava_UsbInterfaceJava
- * Method:    Suma
- * Signature: (II)D
- */
-JNIEXPORT jdouble JNICALL Java_usbinterfacejava_UsbInterfaceJava_Suma
-  (JNIEnv *, jobject, jint, jint);
-
-/*
- * Class:     usbinterfacejava_UsbInterfaceJava
- * Method:    Resta
- * Signature: (II)D
- */
-JNIEXPORT jdouble JNICALL Java_usbinterfacejava_UsbInterfaceJava_Resta
-  (JNIEnv *, jobject, jint, jint);
-
-/*
- * Class:     usbinterfacejava_UsbInterfaceJava
  * Method:    sayHello
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
+    
 JNIEXPORT jstring JNICALL Java_usbinterfacejava_UsbInterfaceJava_sayHello
   (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     usbinterfacejava_UsbInterfaceJava
+ * Method:    SerialPort
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_usbinterfacejava_UsbInterfaceJava_SerialPort
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     usbinterfacejava_UsbInterfaceJava
+ * Method:    isconnected
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_isconnected
+  (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }

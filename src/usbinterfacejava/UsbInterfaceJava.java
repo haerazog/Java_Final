@@ -10,14 +10,16 @@ public class UsbInterfaceJava {
 
      public static void main(String[] args) {
         System.loadLibrary("libLibreriaMela");
-        System.out.println(new UsbInterfaceJava().Suma(4, 5));
-        System.out.println(new UsbInterfaceJava().Resta(4, 5));
-        String result = new UsbInterfaceJava().sayHello("Hello from Java");
-        System.out.println("In Java, the returned string is: " + result);
+        //String result = new UsbInterfaceJava().sayHello("Hello from Java");
+        //System.out.println("In Java, the returned string is: " + result);
+        
+        new UsbInterfaceJava().SerialPort("\\\\.\\COM14");
+        int response = new UsbInterfaceJava().isconnected();
+        System.out.println("Is connected: " + response);
     }
     
-    private native double Suma(int num1, int num2);
-    private native double Resta(int num1, int num2);
     private native String sayHello(String msg);
+    private native void SerialPort(String port);
+    private native int isconnected();
     
 }
