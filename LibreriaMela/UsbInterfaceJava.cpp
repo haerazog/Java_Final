@@ -3,7 +3,7 @@
 
 #include <jni.h>
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <windows.h>
 #include <stdlib.h>
 #include "UsbInterfaceJava.h"
@@ -16,21 +16,9 @@ using namespace std;
  COMSTAT status;
  DWORD errors;
 
-jstring JNICALL Java_usbinterfacejava_UsbInterfaceJava_sayHello
-  (JNIEnv * env, jobject object, jstring param1) {
-    const char *caracter = env->GetStringUTFChars(param1, NULL);
-    if (NULL == caracter) return NULL;
-    
-    cout << "In C++, the received string is: " << caracter << endl;
-   env->ReleaseStringUTFChars(param1, caracter);
-   
-   string outCppStr;
-   cout << "Enter a String: " << endl;
-   cin >> outCppStr;
-}
-
 void JNICALL Java_usbinterfacejava_UsbInterfaceJava_SerialPort
   (JNIEnv * env, jobject object, jstring param1) {
+    
     const char *portName = env->GetStringUTFChars(param1, NULL);
     
     
@@ -81,8 +69,48 @@ void JNICALL Java_usbinterfacejava_UsbInterfaceJava_SerialPort
 
 jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_isconnected
   (JNIEnv * env, jobject object) {
+    
     if (!ClearCommError(handler, &errors, &status))
 		connected = 0;
         
     return connected;
+}
+
+jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_readSerialPort
+  (JNIEnv * env, jobject object, jstring param1, jint param2) {
+    const char *buffer = env->GetStringUTFChars(param1, NULL);
+    int buf_size = param2;
+    
+     DWORD bytesRead;
+    unsigned int toRead = 0;
+
+    ClearCommError(handler, &errors, &status);
+
+    if (status.cbInQue > 0){
+        if (status.cbInQue > buf_size){
+            toRead = buf_size;
+        }
+        else toRead = status.cbInQue;
+    }
+    
+    void *memadrs=&buffer;
+
+    memset(memadrs, 0, buf_size);
+
+    if (ReadFile(handler, memadrs, toRead, &bytesRead, NULL)) return bytesRead;
+
+    return 0;
+}
+
+jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_writeSerialPort
+  (JNIEnv * env, jobject object, jstring param1, jint param2) {
+    const char *buffer = env->GetStringUTFChars(param1, NULL);
+    int buf_size = param2;
+    DWORD bytesSend;
+
+    if (!WriteFile(handler, (void*) buffer, buf_size, &bytesSend, 0)){
+        ClearCommError(handler, &errors, &status);
+        return 0;
+    }
+    else return 1;
 }

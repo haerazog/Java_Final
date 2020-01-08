@@ -9,15 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     usbinterfacejava_UsbInterfaceJava
- * Method:    sayHello
- * Signature: (Ljava/lang/String;)Ljava/lang/String;
- */
-    
-JNIEXPORT jstring JNICALL Java_usbinterfacejava_UsbInterfaceJava_sayHello
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     usbinterfacejava_UsbInterfaceJava
  * Method:    SerialPort
  * Signature: (Ljava/lang/String;)V
  */
@@ -31,6 +22,22 @@ JNIEXPORT void JNICALL Java_usbinterfacejava_UsbInterfaceJava_SerialPort
  */
 JNIEXPORT jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_isconnected
   (JNIEnv *, jobject);
+
+/*
+ * Class:     usbinterfacejava_UsbInterfaceJava
+ * Method:    readSerialPort
+ * Signature: (Ljava/lang/String;I)I
+ */
+JNIEXPORT jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_readSerialPort
+  (JNIEnv *, jobject, jstring, jint);
+
+/*
+ * Class:     usbinterfacejava_UsbInterfaceJava
+ * Method:    writeSerialPort
+ * Signature: (Ljava/lang/String;I)I
+ */
+JNIEXPORT jint JNICALL Java_usbinterfacejava_UsbInterfaceJava_writeSerialPort
+  (JNIEnv *, jobject, jstring, jint);
 
 #ifdef __cplusplus
 }
